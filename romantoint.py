@@ -20,7 +20,7 @@ class Solution(object):
             'CM': 900
         }
 
-        self.roman_sub_prefixes = ['i', 'X', 'C']
+        self.roman_sub_prefixes = ['I', 'X', 'C']
 
 
     def romanToInt(self, s):
@@ -29,7 +29,20 @@ class Solution(object):
         :rtype: int
         """
 
-        roman_chunk_index = 0
+        unprocessed_roman_characters = s
+        answer = 0
+
+        while unprocessed_roman_characters:
+            if unprocessed_roman_characters[0] in self.roman_sub_prefixes:
+                roman_sub_chunk = unprocessed_roman_characters[0:2]
+                if roman_sub_chunk in self.roman_subs.keys():
+                    answer += self.roman_subs[roman_sub_chunk]
+                    unprocessed_roman_characters = unprocessed_roman_characters[2:]
+            else:
+                answer += self.roman_base_values[unprocessed_roman_characters[0]]
+
+        return answer
+
 
 if __name__ == "__main__":
     sol = Solution()
