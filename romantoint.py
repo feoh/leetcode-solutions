@@ -38,13 +38,18 @@ class Solution(object):
                 if roman_sub_chunk in self.roman_subs.keys():
                     answer += self.roman_subs[roman_sub_chunk]
                     unprocessed_roman_characters = unprocessed_roman_characters[2:]
+                else:
+                    answer += self.roman_base_values[unprocessed_roman_characters[0]]
+                    unprocessed_roman_characters = unprocessed_roman_characters[1:]
             else:
                 answer += self.roman_base_values[unprocessed_roman_characters[0]]
+                unprocessed_roman_characters = unprocessed_roman_characters[1:]
 
         return answer
 
 
 if __name__ == "__main__":
     sol = Solution()
-    answer = sol.romanToInt("MCMXCIV")
-    print(f"answer: {answer}")
+    #answer = sol.romanToInt("MCMXCIV")
+    answer = sol.romanToInt("III")
+    print(answer)
